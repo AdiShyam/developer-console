@@ -1,0 +1,43 @@
+.category-container-title {
+    margin: 5px;
+    padding: 0.5rem;
+    border: 2px black solid;
+    border-radius: 30px;
+    width: fit-content;
+    font-size: 25px;
+}
+
+.category-container-wrapper{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid black;
+}
+
+.app-store-container {
+  margin: 5%;
+  display: flex;
+  flex-wrap: wrap;
+}
+  
+.app-store-header {
+color: white;
+text-shadow: 2px 2px 4px #000000;
+text-align: center;
+font-size: 50px;
+margin: 2% 4%;
+padding: 0.5rem;
+}
+
+.applciation-list-container{
+display: flex;
+flex-wrap: wrap;
+justify-content: flex-start;
+align-content: flex-start
+}
+
+.application-list-Link {
+flex: 1 0 15%;
+margin: 5px;
+}
+  
