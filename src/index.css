@@ -5,6 +5,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* background-image: linear-gradient(rgb(247, 173, 16), rgb(240, 216, 3)); */
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQjEKpRRX1WwmNwg5fAim7o1GX-skBTj4fhAHv7DIR4w75fGOKB');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 code {

@@ -3,7 +3,9 @@
   padding: 0.5rem;
   display: flex;
   justify-content: space-between;
+  background-color: lightgray;
   margin-bottom: 25px;
+  opacity: 0.5;
 }
 
 .logo-container {
@@ -25,16 +27,28 @@
   cursor: pointer;
   white-space: nowrap;
   text-decoration: none;
-  background-color: bisque;
+  color: black;
+  font-size: 30px;
+  background-color: transparent;
+  border: 2px solid lightslategray;
+  background-color: lightslategray;
 }
 
-.header-container-wrapper{
+.option:hover{
+  background-color: rgb(89, 99, 109)
+}
+
+.header-container-wrapper {
   display: flex;
-  width: 15%;
+  padding-left: 1.0rem;
+  height: 100%;
+  width: 20%;
+  align-items: center;
   justify-content: space-evenly;
 }
 
 .header-log-wrapper {
   display: flex;
   width: 5%;
+  padding-right: 4rem;
 }

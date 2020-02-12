@@ -23,12 +23,12 @@ class Header extends React.Component {
     if (loginStuats) {
       return (
         <div to='/' className='option' onClick={this.handleLogOut}>
-          SIGN OUT
+          Sign Out
       </div>)
     } else {
       return (
         <div className='option'>
-          SIGN IN
+          Sign In
       </div>)
     }
   }

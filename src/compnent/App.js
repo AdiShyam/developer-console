@@ -7,6 +7,7 @@ import history from '../history';
 import Publish from './Publish';
 import Header from './header';
 import data from "./data";
+import { getData } from '../APIs/jsonPlaceHolder';
 
 class App extends React.Component {
   constructor(props) {
@@ -20,14 +21,18 @@ class App extends React.Component {
   }
 
   componentDidMount = async() => {
-    // let response = await getData("http://136.18.212.65:6555/v1/list?categories=All"); //rajesh IP
-    let response = data;
+    let response = await getData("https://appstore-backend-dot-appstore-viscloud.appspot.com/v1/list?categories=All"); //rajesh IP
+    console.log("the respose issssssssss", response);
     let applicationMap = new Map();
     const appStoreObject = {};
     let applicationList = response;
+    if (applicationList === undefined) {
+      console.log("No data fetched from server loading stub data");
+      applicationList = data;
+    }
     let mapvalue =[];
     for (let i = 0; i < applicationList.length; i++) {
-      if(applicationMap.has(applicationList[i].genres)) {
+      if (applicationMap.has(applicationList[i].genres)) {
           mapvalue = applicationMap.get(applicationList[i].genres);
           mapvalue.push(applicationList[i]);
         applicationMap.set(applicationList[i].genres, mapvalue)

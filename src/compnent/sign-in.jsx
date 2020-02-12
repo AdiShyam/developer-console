@@ -15,7 +15,7 @@ class SignIn extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    if (this.state.username === "admin" && this.state.password === "admin") {
+    if (this.state.username === "admin" && this.state.password === "password") {
       this.props.logInOutStatus(true);
       history.push("/AppStore");
     } else {
