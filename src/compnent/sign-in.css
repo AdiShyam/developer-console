@@ -14,7 +14,7 @@
 }
 
 .sign-in-and-sign-up {
-  width: 850px;
+  width: 80%;
   display: flex;
   justify-content: space-between;
   margin: 30px auto;
@@ -38,6 +38,7 @@
   cursor: pointer;
   display: flex;
   justify-content: center;
+  border-radius: 30px;
 }
 .custom-button:hover {
   background-color: white;

@@ -1,12 +1,12 @@
 import React from 'react';
-import faker from 'faker';
 import './App.css';
 import SignIn from './sign-in';
-import { Switch, Route, Router, Redirect } from 'react-router-dom';
+import { Switch, Route, Router } from 'react-router-dom';
 import AppStore from './App-store';
 import history from '../history';
 import Publish from './Publish';
 import Header from './header';
+import data from "./data";
 
 class App extends React.Component {
   constructor(props) {
@@ -18,49 +18,45 @@ class App extends React.Component {
       logInStatus: false
     }
   }
-  
-  handleSelectedApp () {
-    console.log("click happened");
-  }
-  componentDidMount() {
-    let appStoreList = [];
+
+  componentDidMount = async() => {
+    // let response = await getData("http://136.18.212.65:6555/v1/list?categories=All"); //rajesh IP
+    let response = data;
+    let applicationMap = new Map();
     const appStoreObject = {};
-    const applciationCategory = [ "Social", "Music & Video", "Travel", "Tools", "Games", "Shopping" , "Photos", "Reading", "Sports & Health", "Education"];
-    applciationCategory.forEach(category => {
-      let randomNumber = Math.floor(Math.random() * 20) + 1;
-      appStoreList = [];
-      for (let i=0; i<randomNumber; i++) {
-          let application = {};
-          application.ispwa = true;
-          application.title = faker.name.title();
-          application.image = faker.image.avatar();
-          application.installationState = Boolean(Math.round(Math.random()));
-          application.description = faker.lorem.paragraphs();
-          application.developerName = faker.name.findName()
-          appStoreList.push(application);
+    let applicationList = response;
+    let mapvalue =[];
+    for (let i = 0; i < applicationList.length; i++) {
+      if(applicationMap.has(applicationList[i].genres)) {
+          mapvalue = applicationMap.get(applicationList[i].genres);
+          mapvalue.push(applicationList[i]);
+        applicationMap.set(applicationList[i].genres, mapvalue)
+      } else {
+        applicationMap.set(applicationList[i].genres, [applicationList[i]]);
       }
-      appStoreObject[category] = appStoreList;
-    });
-    this.setState({ appStoreObject, appStoreList });
+    }
+
+    for (let [key, value] of applicationMap) {
+      appStoreObject[key] = value;
+    }
+
+    this.setState({ appStoreObject });
   }
 
   handleLogInOut = ( logInStatus )=> {
-    debugger;
     this.setState({ logInStatus })
   }
 
   render() {
     return (
-      <div>
         <Router history = {history} >
-        <Header isLogIn={this.state.logInStatus} >Header Content</Header>
+        <Header logInStatus={this.state.logInStatus} isLogIn={this.handleLogInOut} >Header Content</Header>
           <Switch>
-            <Route exact path='/AppStore' render={() => <AppStore appStoreObject={this.state.appStoreObject} selectedApp = {this.handleSelectedApp} />} />
+            <Route exact path='/AppStore' render={() => <AppStore appStoreObject={this.state.appStoreObject} />} />
             <Route exact path='/publish' component={Publish} />
             <Route  path='/' render={() => <SignIn logInOutStatus ={this.handleLogInOut} />} />
           </Switch>
         </Router>
-      </div>
     );
   }
 }

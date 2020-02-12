@@ -2,44 +2,53 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import './header.css';
+import history from '../history';
 
 class Header extends React.Component {
 
   constructor(props) {
     super(props);
-    // this.state = {
-    //   currentUser: 
-    // }
+    this.state = {
+      currentUser: false
+    }
   }
 
-  handleClick = () => {
-    // const status = !this.props.isLogIn;
-    debugger;
-    // this.setState({currentUser: status})
-    console.log("logOut clicked");
+  handleLogOut = () => {
+    this.setState({ currentUser: false });
+    this.props.isLogIn(false);
+    history.push("/");
+  }
+
+  renderLoginStatusButton = (loginStuats) => {
+    if (loginStuats) {
+      return (
+        <div to='/' className='option' onClick={this.handleLogOut}>
+          SIGN OUT
+      </div>)
+    } else {
+      return (
+        <div className='option'>
+          SIGN IN
+      </div>)
+    }
   }
 
   render() {
-    debugger;
     console.log("the props are ", this.props);
     return (
       <div className='header'>
         <div className='options'>
-          <Link className='option' to='/'>
-            App Store
-      </Link>
-          <Link className='option' to='/Publish'>
-            Publish
-      </Link>
-          {this.props.isLogIn ? (
-            <Link to='/' className='option' onClick={this.handleClick}>
-              SIGN OUT
-        </Link>
-          ) : (
-              <Link className='option' to='/publish'>
-                SIGN In
-        </Link>
-            )}
+          <div className="header-container-wrapper">
+            <Link className='option' to={(this.props.logInStatus) ? '/AppStore' : '/'}>
+                App Store
+            </Link>
+            <Link className='option' to={(this.props.logInStatus) ? '/Publish' : '/'}>
+                Publish
+            </Link>
+          </div>
+          <div className="header-log-wrapper">
+            {this.renderLoginStatusButton(this.props.logInStatus)}
+          </div>
         </div>
       </div>
     );

@@ -6,23 +6,21 @@ class AppStore extends React.Component {
  
     renderAppList = (appStoreObject) => {
         console.log("the data", appStoreObject);
-        const containerDOM = [];
-        debugger
-        for (var category in appStoreObject) {
-            // console.log("the category object is ", category);
+        const categoryList = Object.keys(appStoreObject);
+        let containerDOM =[]
+        for(let i =0; i<categoryList.length; i++) {
+            let category = categoryList[i];
             containerDOM.push(
-                <div className="category-container-wrapper" key={category}>
-                    <div className = "category-container-title thumb-nail-title">{category}</div>
-                    <ApplicationList category = {category} appListData={appStoreObject[category]} />
-                </div>
-            );
+            <div className="category-container-wrapper" key={category}>
+                <div className = "category-container-title thumb-nail-title">{category}</div>
+                <ApplicationList category = {category} appListData={appStoreObject[category]} />
+            </div>)
         }
         return containerDOM;
     }
 
     render() {
         const appData = this.props.appStoreObject;
-        debugger
         if (appData) {
             return (<div>
                 {this.renderAppList(appData)}

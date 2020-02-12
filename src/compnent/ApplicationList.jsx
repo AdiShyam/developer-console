@@ -13,10 +13,10 @@ class ApplicationList extends React.Component {
     renderAppList(appStoreList, category) {
         if(appStoreList) {
             return ( appStoreList.map((application) => {
-                const { name } = application;
+                const { title } = application;
                 return (
                     <div className ="application-list-Link" >
-                        <AppThumbNail key={name} appData={application} />
+                        <AppThumbNail key={title} appData={application} />
                     </div>
                 )
             }))

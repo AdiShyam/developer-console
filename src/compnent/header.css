@@ -1,10 +1,11 @@
 .header {
   height: 70px;
-  width: 100%;
+  padding: 0.5rem;
   display: flex;
   justify-content: space-between;
   margin-bottom: 25px;
 }
+
 .logo-container {
   height: 100%;
   width: 70px;
@@ -12,15 +13,28 @@
 }
 
 .options {
-  width: 50%;
+  width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 
 .option {
   padding: 10px 15px;
   cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+  background-color: bisque;
 }
- 
+
+.header-container-wrapper{
+  display: flex;
+  width: 15%;
+  justify-content: space-evenly;
+}
+
+.header-log-wrapper {
+  display: flex;
+  width: 5%;
+}

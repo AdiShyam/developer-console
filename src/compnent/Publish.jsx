@@ -10,23 +10,63 @@ class Publish extends React.Component {
         iconUrl: '',
         isInstalled: '',
         description: '',
-        name: '',
+        title: '',
         url: '', //site url,
-        developerName: ""
+        developerName: "",
+        appUrl: ''
     };
   }
 
   handleSubmit = event => {
     event.preventDefault();
-    debugger;
-    console.log("this is the publish submit");
-    history.push("/AppStore");
+    var data = {
+      appid: 123,
+      title: this.state.title,
+      url: "https://www.trivago.in/",
+      icons: [
+        {
+          "src": "https://d3frsattnbx5l6.cloudfront.net/1532688811564-trivago-apple-touch-icon.png"
+        }
+      ],
+      isPwa: true,
+      description: "Every month 120+ million visitors use trivago to search & compare hotel prices, read reviews & browse photos. Find your ideal hotel deal on trivago.com",
+      developerName: this.state.developerName,
+      installationState: "installed",
+      genres: this.state.category
+    }
+
+    let url = "http://136.18.212.65:6555/v1/updates";
+    let response =  this.postData(url, data);
+    console.log("the response is successful", response);
+    response.then(()=> {
+      history.push("/AppStore");
+    }).catch((e) => {
+      console.log("the error is", e);
+    })
   };
 
   handleChange = event => {
     const { value, name } = event.target;
     this.setState({ [name]: value });
   };
+
+  postData = async(url = '', data = {}) => {
+    // Default options are marked with *
+    const response = await fetch(url, {
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      mode: 'cors', // no-cors, *cors, same-origin
+      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: 'same-origin', // include, *same-origin, omit
+      headers: {
+        'Content-Type': 'application/json'
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: 'follow', // manual, *follow, error
+      referrerPolicy: 'no-referrer', // no-referrer, *client
+      body: JSON.stringify(data) // body data type must match "Content-Type" header
+    });
+    return await response.json(); // parses JSON response into native JavaScript objects
+  }
 
   render() {
     return (
@@ -44,11 +84,11 @@ class Publish extends React.Component {
                 required
             />
             <FormInput
-                name='name'
-                type='name'
+                name='title'
+                type='title'
                 handleChange={this.handleChange}
-                value={this.state.name}
-                label='name'
+                value={this.state.title}
+                label='title'
                 required
             />
             <FormInput
@@ -67,7 +107,22 @@ class Publish extends React.Component {
                 label='iconUrl'
                 required
             />
-            
+            <FormInput
+                name='appUrl'
+                type='appUrl'
+                handleChange={this.handleChange}
+                value={this.state.appUrl}
+                label='appUrl'
+                required
+            />
+            <FormInput
+                name='developerName'
+                type='developerName'
+                handleChange={this.handleChange}
+                value={this.state.developerName}
+                label='developerName'
+                required
+            />
             <div className='buttons'>
                 <button className= 'custom-button' type='submit'> Publish </button>
             </div>

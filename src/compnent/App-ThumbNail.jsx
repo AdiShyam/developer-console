@@ -6,7 +6,7 @@ class AppThumbNail extends React.Component {
     renderThumbNail = (appData) => {
         return (
         <div>
-            <img className ="thumb-nail-image" src = {appData.image} alt={appData.name}/>    
+            <img className ="thumb-nail-image" src = {appData.icons[0].src} alt={appData.title}/>
         </div>)
     }
     
@@ -14,7 +14,7 @@ class AppThumbNail extends React.Component {
         return(
             <div onClick= {this.handleClick} className ="thumb-nail-container">
                 {this.renderThumbNail(this.props.appData)}
-                <div className="thumb-nail-title">{this.props.appData.name}</div>
+                <div className="thumb-nail-title">{this.props.appData.title}</div>
             </div>
         )
     }
